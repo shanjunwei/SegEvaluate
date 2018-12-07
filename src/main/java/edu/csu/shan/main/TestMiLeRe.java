@@ -1,14 +1,12 @@
 package edu.csu.shan.main;
 
-import edu.csu.shan.evaluate.other.HanLPEvaluation;
+import edu.csu.shan.evaluate.other.MiLeReValuation;
 
-/**
- *   评估HanLP 的分析效果
- */
-public class TestHanLP {
+public class TestMiLeRe {
 
     public static void main(String[] args) {
-        HanLPEvaluation  evaluation = new HanLPEvaluation();
+
+        MiLeReValuation evaluation = new MiLeReValuation();
         try {
             evaluation.run();
         } catch (Exception e) {
