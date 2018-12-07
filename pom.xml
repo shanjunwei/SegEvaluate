@@ -8,5 +8,20 @@
     <artifactId>SegEvaluate</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+<properties>
+    <hanlp.version>portable-1.1.5</hanlp.version>
+</properties>
+
+
+    <dependencies>
+
+        <!-- HanLP分词器 -->
+        <dependency>
+            <groupId>com.hankcs</groupId>
+            <artifactId>hanlp</artifactId>
+            <version>${hanlp.version}</version>
+        </dependency>
+    </dependencies>
+
 
 </project>
