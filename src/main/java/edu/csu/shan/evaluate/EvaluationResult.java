@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, æ¨å°šå·, yang-shangchuan@qq.com
+ * Copyright (c) 2013, ÑîÉĞ´¨, yang-shangchuan@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,40 +21,40 @@
 package edu.csu.shan.evaluate;
 
 /**
- * åˆ†è¯æ•ˆæœè¯„ä¼°ç»“æœ
- * @author æ¨å°šå·
+ * ·Ö´ÊĞ§¹ûÆÀ¹À½á¹û
+ * @author ÑîÉĞ´¨
  */
 public class EvaluationResult implements Comparable{
     /**
-     * åˆ†è¯å™¨
+     * ·Ö´ÊÆ÷
      */
     private String analyzer;
     /**
-     * åˆ†è¯é€Ÿåº¦
+     * ·Ö´ÊËÙ¶È
      */
     private float segSpeed;
     /**
-     * åˆ†è¯æ–‡æœ¬æ€»è¡Œæ•°
+     * ·Ö´ÊÎÄ±¾×ÜĞĞÊı
      */
     private int totalLineCount;
     /**
-     * åˆ†è¯ç»“æœå®Œå…¨æ­£ç¡®çš„è¡Œæ•°
+     * ·Ö´Ê½á¹ûÍêÈ«ÕıÈ·µÄĞĞÊı
      */
     private int perfectLineCount;
     /**
-     * åˆ†è¯ç»“æœé”™è¯¯çš„è¡Œæ•°
+     * ·Ö´Ê½á¹û´íÎóµÄĞĞÊı
      */
     private int wrongLineCount;
     /**
-     * åˆ†è¯æ–‡æœ¬æ€»å­—æ•°
+     * ·Ö´ÊÎÄ±¾×Ü×ÖÊı
      */
     private int totalCharCount;
     /**
-     * åˆ†è¯ç»“æœå®Œå…¨æ­£ç¡®çš„å­—æ•°
+     * ·Ö´Ê½á¹ûÍêÈ«ÕıÈ·µÄ×ÖÊı
      */
     private int perfectCharCount;
     /**
-     * åˆ†è¯ç»“æœé”™è¯¯çš„å­—æ•°
+     * ·Ö´Ê½á¹û´íÎóµÄ×ÖÊı
      */
     private int wrongCharCount;
 
@@ -121,26 +121,26 @@ public class EvaluationResult implements Comparable{
     @Override
     public String toString(){
         if(perfectCharCount==0){
-            //åªè¯„ä¼°é€Ÿåº¦
-            return analyzer+"ï¼š"
+            //Ö»ÆÀ¹ÀËÙ¶È
+            return analyzer+"£º"
                     +"\n"
-                    +"    åˆ†è¯é€Ÿåº¦ï¼š"+segSpeed+" å­—ç¬¦/æ¯«ç§’";
+                    +"    ·Ö´ÊËÙ¶È£º"+segSpeed+" ×Ö·û/ºÁÃë";
         }
-        return analyzer+"ï¼š"
+        return analyzer+"£º"
                 +"\n"
-                +"    åˆ†è¯é€Ÿåº¦ï¼š"+segSpeed+" å­—ç¬¦/æ¯«ç§’"
+                +"    ·Ö´ÊËÙ¶È£º"+segSpeed+" ×Ö·û/ºÁÃë"
                 +"\n"
-                +"    è¡Œæ•°å®Œç¾ç‡ï¼š"+getLinePerfectRate()+"%"
-                +"  è¡Œæ•°é”™è¯¯ç‡ï¼š"+getLineWrongRate()+"%"
-                +"  æ€»çš„è¡Œæ•°ï¼š"+totalLineCount
-                +"  å®Œç¾è¡Œæ•°ï¼š"+perfectLineCount
-                +"  é”™è¯¯è¡Œæ•°ï¼š"+wrongLineCount
+                +"    ĞĞÊıÍêÃÀÂÊ£º"+getLinePerfectRate()+"%"
+                +"  ĞĞÊı´íÎóÂÊ£º"+getLineWrongRate()+"%"
+                +"  ×ÜµÄĞĞÊı£º"+totalLineCount
+                +"  ÍêÃÀĞĞÊı£º"+perfectLineCount
+                +"  ´íÎóĞĞÊı£º"+wrongLineCount
                 +"\n"
-                +"    åˆ†è¯å®Œç¾ç‡ï¼š"+getCharPerfectRate()+"%"
-                +" åˆ†è¯é”™è¯¯ç‡ï¼š"+getCharWrongRate()+"%"
-                +" æ€»çš„å­—æ•°ï¼š"+totalCharCount
-                +" å®Œç¾å­—æ•°ï¼š"+perfectCharCount
-                +" é”™è¯¯å­—æ•°ï¼š"+wrongCharCount;
+                +"    ·Ö´ÊÍêÃÀÂÊ£º"+getCharPerfectRate()+"%"
+                +" ·Ö´Ê´íÎóÂÊ£º"+getCharWrongRate()+"%"
+                +" ×ÜµÄ×ÖÊı£º"+totalCharCount
+                +" ÍêÃÀ×ÖÊı£º"+perfectCharCount
+                +" ´íÎó×ÖÊı£º"+wrongCharCount;
     }
     @Override
     public int compareTo(Object o) {

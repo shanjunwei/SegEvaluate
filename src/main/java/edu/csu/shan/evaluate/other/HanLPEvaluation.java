@@ -1,6 +1,6 @@
 /*
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, æ¨å°šå·, yang-shangchuan@qq.com
+ * Copyright (c) 2013, ÑîÉĞ´¨, yang-shangchuan@qq.com
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -35,8 +35,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * HanLPåˆ†è¯å™¨åˆ†è¯æ•ˆæœè¯„ä¼°
- * @author æ¨å°šå·
+ * HanLP·Ö´ÊÆ÷·Ö´ÊĞ§¹ûÆÀ¹À
+ * @author ÑîÉĞ´¨
  */
 public class HanLPEvaluation extends Evaluation implements WordSegmenter {
     private static final Segment N_SHORT_SEGMENT = new NShortSegment().enableCustomDictionary(false).enablePlaceRecognize(true).enableOrganizationRecognize(true);
@@ -46,47 +46,47 @@ public class HanLPEvaluation extends Evaluation implements WordSegmenter {
     public List<EvaluationResult> run() throws Exception {
         List<EvaluationResult> list = new ArrayList<>();
 
-       // run(list, "æ ‡å‡†åˆ†è¯");
-/*        run(list, "NLPåˆ†è¯");
-        run(list, "ç´¢å¼•åˆ†è¯");
-        run(list, "N-æœ€çŸ­è·¯å¾„åˆ†è¯");
-        run(list, "æœ€çŸ­è·¯å¾„åˆ†è¯");
+       // run(list, "±ê×¼·Ö´Ê");
+/*        run(list, "NLP·Ö´Ê");
+        run(list, "Ë÷Òı·Ö´Ê");
+        run(list, "N-×î¶ÌÂ·¾¶·Ö´Ê");
+        run(list, "×î¶ÌÂ·¾¶·Ö´Ê");
         */
-        run(list, "æé€Ÿè¯å…¸åˆ†è¯");
+        run(list, "¼«ËÙ´Êµä·Ö´Ê");
         return list;
     }
     private void run(List<EvaluationResult> list, String type) throws Exception{
-        System.out.println("å¼€å§‹è¯„ä¼° HanLPåˆ†è¯å™¨  "+type);
+        System.out.println("¿ªÊ¼ÆÀ¹À HanLP·Ö´ÊÆ÷  "+type);
         list.add(run(type));
-        Evaluation.generateReport(list, "HanLPåˆ†è¯å™¨åˆ†è¯æ•ˆæœè¯„ä¼°æŠ¥å‘Š.txt");
+        Evaluation.generateReport(list, "HanLP·Ö´ÊÆ÷·Ö´ÊĞ§¹ûÆÀ¹À±¨¸æ.txt");
     }
     private EvaluationResult run(String type) throws Exception{
-        //å¯¹æ–‡æœ¬è¿›è¡Œåˆ†è¯
+        //¶ÔÎÄ±¾½øĞĞ·Ö´Ê
         String resultText = "temp/result-text-HanLP-"+type+".txt";
         float rate = 0;
         switch (type){
-            case "æ ‡å‡†åˆ†è¯":rate = segFile(testText, resultText, text -> HanLPEvaluation.standard(text));break;
-            case "NLPåˆ†è¯":rate = segFile(testText, resultText, text -> HanLPEvaluation.nlp(text));break;
-            case "ç´¢å¼•åˆ†è¯":rate = segFile(testText, resultText, text -> HanLPEvaluation.index(text));break;
-            case "N-æœ€çŸ­è·¯å¾„åˆ†è¯":rate = segFile(testText, resultText, text -> HanLPEvaluation.nShort(text));break;
-            case "æœ€çŸ­è·¯å¾„åˆ†è¯":rate = segFile(testText, resultText, text -> HanLPEvaluation.shortest(text));break;
-            case "æé€Ÿè¯å…¸åˆ†è¯":rate = segFile(testText, resultText, text -> HanLPEvaluation.speed(text));break;
+            case "±ê×¼·Ö´Ê":rate = segFile(testText, resultText, text -> HanLPEvaluation.standard(text));break;
+            case "NLP·Ö´Ê":rate = segFile(testText, resultText, text -> HanLPEvaluation.nlp(text));break;
+            case "Ë÷Òı·Ö´Ê":rate = segFile(testText, resultText, text -> HanLPEvaluation.index(text));break;
+            case "N-×î¶ÌÂ·¾¶·Ö´Ê":rate = segFile(testText, resultText, text -> HanLPEvaluation.nShort(text));break;
+            case "×î¶ÌÂ·¾¶·Ö´Ê":rate = segFile(testText, resultText, text -> HanLPEvaluation.shortest(text));break;
+            case "¼«ËÙ´Êµä·Ö´Ê":rate = segFile(testText, resultText, text -> HanLPEvaluation.speed(text));break;
         }
-        //å¯¹åˆ†è¯ç»“æœè¿›è¡Œè¯„ä¼°
+        //¶Ô·Ö´Ê½á¹û½øĞĞÆÀ¹À
         EvaluationResult evaluationResult = evaluate(resultText, standardText);
-        evaluationResult.setAnalyzer("HanLPåˆ†è¯å™¨ " + type);
+        evaluationResult.setAnalyzer("HanLP·Ö´ÊÆ÷ " + type);
         evaluationResult.setSegSpeed(rate);
         return evaluationResult;
     }
     @Override
     public Map<String, String> segMore(String text) {
         Map<String, String> map = new HashMap<>();
-        map.put("æ ‡å‡†åˆ†è¯", standard(text));
-        map.put("NLPåˆ†è¯", nlp(text));
-        map.put("ç´¢å¼•åˆ†è¯", index(text));
-        map.put("N-æœ€çŸ­è·¯å¾„åˆ†è¯", nShort(text));
-        map.put("æœ€çŸ­è·¯å¾„åˆ†è¯", shortest(text));
-        map.put("æé€Ÿè¯å…¸åˆ†è¯", speed(text));
+        map.put("±ê×¼·Ö´Ê", standard(text));
+        map.put("NLP·Ö´Ê", nlp(text));
+        map.put("Ë÷Òı·Ö´Ê", index(text));
+        map.put("N-×î¶ÌÂ·¾¶·Ö´Ê", nShort(text));
+        map.put("×î¶ÌÂ·¾¶·Ö´Ê", shortest(text));
+        map.put("¼«ËÙ´Êµä·Ö´Ê", speed(text));
         return map;
     }
     private static String standard(String text) {

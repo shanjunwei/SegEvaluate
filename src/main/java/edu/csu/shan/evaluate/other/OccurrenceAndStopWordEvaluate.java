@@ -1,32 +1,30 @@
 package edu.csu.shan.evaluate.other;
 
-
 import edu.csu.shan.evaluate.Evaluation;
 import edu.csu.shan.evaluate.EvaluationResult;
 import edu.csu.shan.seg.WordSegmenter;
-import seg.Segment;
+import main.edu.csu.shan.main.SegmentByWordOccurrenceAndStopWord;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 /**
- *  自己写的 Mi+Le+Re 分词器效果评估
- * @author  单俊维
+ *  词共现和停用词 评测
  */
-public class MiLeReValuation extends Evaluation implements WordSegmenter {
-    public static final Segment segment  = new Segment();
+public class OccurrenceAndStopWordEvaluate extends Evaluation implements WordSegmenter {
+    public static final SegmentByWordOccurrenceAndStopWord segment = new SegmentByWordOccurrenceAndStopWord();
 
     @Override
     public List<EvaluationResult> run() throws Exception {
         List<EvaluationResult> list = new ArrayList<>();
-        run(list, "信息熵互信息分词");
+        run(list, "词共现集合停用词过滤 分词");
         return list;
     }
     private void run(List<EvaluationResult> list, String type) throws Exception{
-        System.out.println("开始评估 信息熵与互信息 分词器-->"+type);
+        System.out.println("开始评估 词共现集合停用词过滤 分词器  "+type);
         list.add(run(type));
-        Evaluation.generateReport(list, "互信息与左右邻接信息熵分词器分词效果评估报告.txt");
+        Evaluation.generateReport(list, "词共现集合停用词过滤 分词器分词效果评估报告.txt");
     }
 
     @Override
@@ -41,12 +39,12 @@ public class MiLeReValuation extends Evaluation implements WordSegmenter {
         rate = segFile(testText, resultText, text -> segment.segmentToString(text));
         //对分词结果进行评估
         EvaluationResult evaluationResult = evaluate(resultText, standardText);
-        evaluationResult.setAnalyzer("互信息与左右邻接信息熵分词器 " + type);
+        evaluationResult.setAnalyzer("词共现集合停用词过滤 分词器 " + type);
         evaluationResult.setSegSpeed(rate);
         return evaluationResult;
     }
 
     public static void main(String[] args) throws Exception{
-        new MiLeReValuation().run();
+        new OccurrenceAndStopWordEvaluate().run();
     }
 }

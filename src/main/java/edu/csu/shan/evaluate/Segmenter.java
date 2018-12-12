@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, æ¨å°šå·, yang-shangchuan@qq.com
+ * Copyright (c) 2013, ÑîÉĞ´¨, yang-shangchuan@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,14 +21,14 @@
 package edu.csu.shan.evaluate;
 
 /**
- * å¯¹æ–‡æœ¬è¿›è¡Œåˆ†è¯çš„æ¥å£
- * @author æ¨å°šå·
+ * ¶ÔÎÄ±¾½øĞĞ·Ö´ÊµÄ½Ó¿Ú
+ * @author ÑîÉĞ´¨
  */
 public interface Segmenter {
     /**
-     * å¯¹æ–‡æœ¬è¿›è¡Œåˆ†è¯ï¼Œè¯ä¹‹é—´ä»¥ç©ºæ ¼åˆ†éš”
-     * @param text æ–‡æœ¬
-     * @return åˆ†è¯åçš„æ–‡æœ¬
+     * ¶ÔÎÄ±¾½øĞĞ·Ö´Ê£¬´ÊÖ®¼äÒÔ¿Õ¸ñ·Ö¸ô
+     * @param text ÎÄ±¾
+     * @return ·Ö´ÊºóµÄÎÄ±¾
      */
     public String seg(String text);
 }

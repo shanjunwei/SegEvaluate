@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, æ¨å°šå·, yang-shangchuan@qq.com
+ * Copyright (c) 2013, ÑîÉĞ´¨, yang-shangchuan@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,73 +33,73 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
- * è·å–æ–‡æœ¬çš„æ‰€æœ‰åˆ†è¯ç»“æœ, å¯¹æ¯”ä¸åŒåˆ†è¯å™¨ç»“æœ
- * segå’ŒsegMoreä¸¤ä¸ªæ–¹æ³•çš„åŒºåˆ«åœ¨äºè¿”å›å€¼
- * æ¯ä¸€ä¸ªåˆ†è¯å™¨éƒ½å¯èƒ½æœ‰å¤šç§åˆ†è¯æ¨¡å¼ï¼Œæ¯ç§æ¨¡å¼çš„åˆ†è¯ç»“æœéƒ½å¯èƒ½ä¸ç›¸åŒ
- * ç¬¬ä¸€ä¸ªæ–¹æ³•å¿½ç•¥åˆ†è¯å™¨æ¨¡å¼ï¼Œè¿”å›æ‰€æœ‰æ¨¡å¼çš„æ‰€æœ‰ä¸é‡å¤åˆ†è¯ç»“æœ
- * ç¬¬äºŒä¸ªæ–¹æ³•è¿”å›æ¯ä¸€ç§åˆ†è¯å™¨æ¨¡å¼åŠå…¶å¯¹åº”çš„åˆ†è¯ç»“æœ
- * @author æ¨å°šå·
+ * »ñÈ¡ÎÄ±¾µÄËùÓĞ·Ö´Ê½á¹û, ¶Ô±È²»Í¬·Ö´ÊÆ÷½á¹û
+ * segºÍsegMoreÁ½¸ö·½·¨µÄÇø±ğÔÚÓÚ·µ»ØÖµ
+ * Ã¿Ò»¸ö·Ö´ÊÆ÷¶¼¿ÉÄÜÓĞ¶àÖÖ·Ö´ÊÄ£Ê½£¬Ã¿ÖÖÄ£Ê½µÄ·Ö´Ê½á¹û¶¼¿ÉÄÜ²»ÏàÍ¬
+ * µÚÒ»¸ö·½·¨ºöÂÔ·Ö´ÊÆ÷Ä£Ê½£¬·µ»ØËùÓĞÄ£Ê½µÄËùÓĞ²»ÖØ¸´·Ö´Ê½á¹û
+ * µÚ¶ş¸ö·½·¨·µ»ØÃ¿Ò»ÖÖ·Ö´ÊÆ÷Ä£Ê½¼°Æä¶ÔÓ¦µÄ·Ö´Ê½á¹û
+ * @author ÑîÉĞ´¨
  */
 public interface WordSegmenter {
     /**
-     * è·å–æ–‡æœ¬çš„æ‰€æœ‰åˆ†è¯ç»“æœ
-     * @param text æ–‡æœ¬
-     * @return æ‰€æœ‰çš„åˆ†è¯ç»“æœï¼Œå»é™¤é‡å¤
+     * »ñÈ¡ÎÄ±¾µÄËùÓĞ·Ö´Ê½á¹û
+     * @param text ÎÄ±¾
+     * @return ËùÓĞµÄ·Ö´Ê½á¹û£¬È¥³ıÖØ¸´
      */
     default public Set<String> seg(String text) {
         return segMore(text).values().stream().collect(Collectors.toSet());
     }
     /**
-     * è·å–æ–‡æœ¬çš„æ‰€æœ‰åˆ†è¯ç»“æœ
-     * @param text æ–‡æœ¬
-     * @return æ‰€æœ‰çš„åˆ†è¯ç»“æœï¼ŒKEY ä¸ºåˆ†è¯å™¨æ¨¡å¼ï¼ŒVALUE ä¸ºåˆ†è¯å™¨ç»“æœ
+     * »ñÈ¡ÎÄ±¾µÄËùÓĞ·Ö´Ê½á¹û
+     * @param text ÎÄ±¾
+     * @return ËùÓĞµÄ·Ö´Ê½á¹û£¬KEY Îª·Ö´ÊÆ÷Ä£Ê½£¬VALUE Îª·Ö´ÊÆ÷½á¹û
      */
     public Map<String, String> segMore(String text);
     
     public static Map<String, Set<String>> contrast(String text){
         Map<String, Set<String>> map = new LinkedHashMap<>();
-        map.put("HanLPåˆ†è¯å™¨", new HanLPEvaluation().seg(text));
+        map.put("HanLP·Ö´ÊÆ÷", new HanLPEvaluation().seg(text));
 
-/*        map.put("wordåˆ†è¯å™¨", new WordEvaluation().seg(text));
-        map.put("Stanfordåˆ†è¯å™¨", new StanfordEvaluation().seg(text));
-        map.put("Ansjåˆ†è¯å™¨", new AnsjEvaluation().seg(text));
-        map.put("smartcnåˆ†è¯å™¨", new SmartCNEvaluation().seg(text));
-        map.put("FudanNLPåˆ†è¯å™¨", new FudanNLPEvaluation().seg(text));
-        map.put("Jiebaåˆ†è¯å™¨", new JiebaEvaluation().seg(text));
-        map.put("Jcsegåˆ†è¯å™¨", new JcsegEvaluation().seg(text));
-        map.put("MMSeg4jåˆ†è¯å™¨", new MMSeg4jEvaluation().seg(text));
-        map.put("IKAnalyzeråˆ†è¯å™¨", new IKAnalyzerEvaluation().seg(text));*/
+/*        map.put("word·Ö´ÊÆ÷", new WordEvaluation().seg(text));
+        map.put("Stanford·Ö´ÊÆ÷", new StanfordEvaluation().seg(text));
+        map.put("Ansj·Ö´ÊÆ÷", new AnsjEvaluation().seg(text));
+        map.put("smartcn·Ö´ÊÆ÷", new SmartCNEvaluation().seg(text));
+        map.put("FudanNLP·Ö´ÊÆ÷", new FudanNLPEvaluation().seg(text));
+        map.put("Jieba·Ö´ÊÆ÷", new JiebaEvaluation().seg(text));
+        map.put("Jcseg·Ö´ÊÆ÷", new JcsegEvaluation().seg(text));
+        map.put("MMSeg4j·Ö´ÊÆ÷", new MMSeg4jEvaluation().seg(text));
+        map.put("IKAnalyzer·Ö´ÊÆ÷", new IKAnalyzerEvaluation().seg(text));*/
         return map;
     }
     public static Map<String, Map<String, String>> contrastMore(String text){
         Map<String, Map<String, String>> map = new LinkedHashMap<>();
-/*        map.put("wordåˆ†è¯å™¨", new WordEvaluation().segMore(text));
-        map.put("Stanfordåˆ†è¯å™¨", new StanfordEvaluation().segMore(text));
-        map.put("Ansjåˆ†è¯å™¨", new AnsjEvaluation().segMore(text));*/
-        map.put("HanLPåˆ†è¯å™¨", new HanLPEvaluation().segMore(text));
-/*        map.put("smartcnåˆ†è¯å™¨", new SmartCNEvaluation().segMore(text));
-        map.put("FudanNLPåˆ†è¯å™¨", new FudanNLPEvaluation().segMore(text));
-        map.put("Jiebaåˆ†è¯å™¨", new JiebaEvaluation().segMore(text));
-        map.put("Jcsegåˆ†è¯å™¨", new JcsegEvaluation().segMore(text));
-        map.put("MMSeg4jåˆ†è¯å™¨", new MMSeg4jEvaluation().segMore(text));
-        map.put("IKAnalyzeråˆ†è¯å™¨", new IKAnalyzerEvaluation().segMore(text));*/
+/*        map.put("word·Ö´ÊÆ÷", new WordEvaluation().segMore(text));
+        map.put("Stanford·Ö´ÊÆ÷", new StanfordEvaluation().segMore(text));
+        map.put("Ansj·Ö´ÊÆ÷", new AnsjEvaluation().segMore(text));*/
+        map.put("HanLP·Ö´ÊÆ÷", new HanLPEvaluation().segMore(text));
+/*        map.put("smartcn·Ö´ÊÆ÷", new SmartCNEvaluation().segMore(text));
+        map.put("FudanNLP·Ö´ÊÆ÷", new FudanNLPEvaluation().segMore(text));
+        map.put("Jieba·Ö´ÊÆ÷", new JiebaEvaluation().segMore(text));
+        map.put("Jcseg·Ö´ÊÆ÷", new JcsegEvaluation().segMore(text));
+        map.put("MMSeg4j·Ö´ÊÆ÷", new MMSeg4jEvaluation().segMore(text));
+        map.put("IKAnalyzer·Ö´ÊÆ÷", new IKAnalyzerEvaluation().segMore(text));*/
         return map;
     }
     public static void show(Map<String, Set<String>> map){
         map.keySet().forEach(k -> {
-            System.out.println(k + " çš„åˆ†è¯ç»“æœï¼š");
+            System.out.println(k + " µÄ·Ö´Ê½á¹û£º");
             AtomicInteger i = new AtomicInteger();
             map.get(k).forEach(v -> {
-                System.out.println("\t" + i.incrementAndGet() + " ã€" + v);
+                System.out.println("\t" + i.incrementAndGet() + " ¡¢" + v);
             });
         });
     }
     public static void showMore(Map<String, Map<String, String>> map){
         map.keySet().forEach(k->{
-            System.out.println(k + " çš„åˆ†è¯ç»“æœï¼š");
+            System.out.println(k + " µÄ·Ö´Ê½á¹û£º");
             AtomicInteger i = new AtomicInteger();
             map.get(k).keySet().forEach(a -> {
-                System.out.println("\t" + i.incrementAndGet()+ " ã€ã€"   + a + "ã€‘\t" + map.get(k).get(a));
+                System.out.println("\t" + i.incrementAndGet()+ " ¡¢¡¾"   + a + "¡¿\t" + map.get(k).get(a));
             });
         });
     }
@@ -129,12 +129,12 @@ public interface WordSegmenter {
         System.out.println("********************************************");
     }
     public static void showUsage(){
-        System.out.println("è¾“å…¥exité€€å‡ºç¨‹åº");
-        System.out.println("è¾“å…¥è¦åˆ†è¯çš„æ–‡æœ¬åå›è½¦ç¡®è®¤ï¼š");
+        System.out.println("ÊäÈëexitÍË³ö³ÌĞò");
+        System.out.println("ÊäÈëÒª·Ö´ÊµÄÎÄ±¾ºó»Ø³µÈ·ÈÏ£º");
     }
     public static void main(String[] args) {
-        process("æˆ‘çˆ±æ¥šç¦»é™Œ");
-        process("ç»“åˆæˆåˆ†å­");
+        process("ÎÒ°®³şÀëÄ°");
+        process("½áºÏ³É·Ö×Ó");
         String encoding = "utf-8";
         if(args==null || args.length == 0){
             showUsage();

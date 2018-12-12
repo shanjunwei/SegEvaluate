@@ -1,6 +1,6 @@
 /**
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, æ¨å°šå·, yang-shangchuan@qq.com
+ * Copyright (c) 2013, ÑîÉĞ´¨, yang-shangchuan@qq.com
  * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,9 +27,9 @@ import java.nio.file.Paths;
 import java.util.*;
 
 /**
- * é€šç”¨è¯„ä¼°é€»è¾‘
+ * Í¨ÓÃÆÀ¹ÀÂß¼­
  *
- * @author æ¨å°šå·
+ * @author ÑîÉĞ´¨
  */
 public abstract class Evaluation {
     protected String testText = "data/test-text.txt";
@@ -46,20 +46,20 @@ public abstract class Evaluation {
     }
 
     /**
-     * ç”Ÿæˆè¯„ä¼°æŠ¥å‘Š
+     * Éú³ÉÆÀ¹À±¨¸æ
      *
      * @param list
      * @throws IOException
      */
     public static void generateReport(List<EvaluationResult> list) throws IOException {
-        generateReport(list, "åˆ†è¯æ•ˆæœè¯„ä¼°æŠ¥å‘Š.txt");
+        generateReport(list, "·Ö´ÊĞ§¹ûÆÀ¹À±¨¸æ.txt");
     }
 
     /**
-     * ç”Ÿæˆè¯„ä¼°æŠ¥å‘Š
+     * Éú³ÉÆÀ¹À±¨¸æ
      *
      * @param list
-     * @param reportName ä¿å­˜æŠ¥å‘Šçš„æ–‡ä»¶åç§°
+     * @param reportName ±£´æ±¨¸æµÄÎÄ¼şÃû³Æ
      * @throws IOException
      */
     public static void generateReport(List<EvaluationResult> list, String reportName) throws IOException {
@@ -72,11 +72,11 @@ public abstract class Evaluation {
         }
         List<String> result = new ArrayList<>();
         if (list.get(0).getPerfectLineCount() > 0) {
-            result.add("æŒ‰è¡Œæ•°å®Œç¾ç‡æ’åºï¼š");
+            result.add("°´ĞĞÊıÍêÃÀÂÊÅÅĞò£º");
             Collections.sort(list);
             result.addAll(toText(list));
         }
-        result.add("æŒ‰åˆ†è¯é€Ÿåº¦æ’åºï¼š");
+        result.add("°´·Ö´ÊËÙ¶ÈÅÅĞò£º");
         Collections.sort(list, (a, b) -> new Float(b.getSegSpeed()).compareTo(a.getSegSpeed()));
         result.addAll(toText(list));
         Files.write(report, result, Charset.forName("utf-8"));
@@ -87,7 +87,7 @@ public abstract class Evaluation {
         int i = 1;
         for (EvaluationResult item : list) {
             result.add("");
-            result.add("    " + (i++) + "ã€" + item.toString());
+            result.add("    " + (i++) + "¡¢" + item.toString());
         }
         for (String item : result) {
             System.out.println(item);
@@ -96,22 +96,22 @@ public abstract class Evaluation {
     }
 
     /**
-     * åˆ†è¯æ•ˆæœè¯„ä¼°
+     * ·Ö´ÊĞ§¹ûÆÀ¹À
      *
-     * @param resultText   å®é™…åˆ†è¯ç»“æœæ–‡ä»¶è·¯å¾„
-     * @param standardText æ ‡å‡†åˆ†è¯ç»“æœæ–‡ä»¶è·¯å¾„
-     * @return è¯„ä¼°ç»“æœ
+     * @param resultText   Êµ¼Ê·Ö´Ê½á¹ûÎÄ¼şÂ·¾¶
+     * @param standardText ±ê×¼·Ö´Ê½á¹ûÎÄ¼şÂ·¾¶
+     * @return ÆÀ¹À½á¹û
      * @throws Exception
      */
     protected EvaluationResult evaluate(String resultText, String standardText) throws Exception {
         if (standardText == null) {
-            System.out.println("æ²¡æœ‰æŒ‡å®šæ ‡å‡†æ–‡æœ¬ï¼Œä»…è¯„ä¼°åˆ†è¯é€Ÿåº¦ï¼Œä¸å¯¹åˆ†è¯æ•ˆæœè¿›è¡Œè¯„ä¼°");
+            System.out.println("Ã»ÓĞÖ¸¶¨±ê×¼ÎÄ±¾£¬½öÆÀ¹À·Ö´ÊËÙ¶È£¬²»¶Ô·Ö´ÊĞ§¹û½øĞĞÆÀ¹À");
             return new EvaluationResult();
         }
         int perfectLineCount = 0;
         int wrongLineCount = 0;
         int perfectSegCount = 0;
-        int wrongSegCount = 0;   // å¼•å…¥é”™åˆ†è¯ä¸ªæ•° å–ä»£åŸæ¥çš„é”™åˆ†å­—ç¬¦æ•°ï¼ŒåŸæ¥çš„æŒ‡æ ‡ä¸å¤Ÿç²¾ç»†
+        int wrongSegCount = 0;   // ÒıÈë´í·Ö´Ê¸öÊı È¡´úÔ­À´µÄ´í·Ö×Ö·ûÊı£¬Ô­À´µÄÖ¸±ê²»¹»¾«Ï¸
         // int wrongCharCount=0;
         //      int perfectCharCount=0;
         try (BufferedReader resultReader = new BufferedReader(new InputStreamReader(new FileInputStream(resultText), "utf-8"));
@@ -124,18 +124,18 @@ public abstract class Evaluation {
                     continue;
                 }
                 if (result.equals(standard)) {
-                    //åˆ†è¯ç»“æœå’Œæ ‡å‡†ä¸€æ¨¡ä¸€æ ·
+                    //·Ö´Ê½á¹ûºÍ±ê×¼Ò»Ä£Ò»Ñù
                     perfectLineCount++;
                     perfectSegCount += result.split(" ").length;
                     // perfectCharCount+=standard.replaceAll("\\s+", "").length();
                 } else {
-                    //åˆ†è¯ç»“æœå’Œæ ‡å‡†ä¸ä¸€æ ·
+                    //·Ö´Ê½á¹ûºÍ±ê×¼²»Ò»Ñù
                     Set<String> resultSet = new HashSet<>(Arrays.asList(result.split(" ")));
                     Set<String> standardSet = new HashSet<>(Arrays.asList(standard.split(" ")));
 
                     for (String seg : resultSet) {
                         if (!standardSet.contains(seg)) {
-                            wrongSegCount++;   // é”™åˆ†ä¸ªæ•°åŠ ä¸€
+                            wrongSegCount++;   // ´í·Ö¸öÊı¼ÓÒ»
                         } else {
                             perfectSegCount++;
                         }
@@ -158,16 +158,16 @@ public abstract class Evaluation {
     }
 
     /**
-     * å¯¹æ–‡ä»¶è¿›è¡Œåˆ†è¯
+     * ¶ÔÎÄ¼ş½øĞĞ·Ö´Ê
      *
-     * @param input     è¾“å…¥æ–‡ä»¶
-     * @param output    è¾“å‡ºæ–‡ä»¶
-     * @param segmenter å¯¹æ–‡æœ¬è¿›è¡Œåˆ†è¯çš„é€»è¾‘
-     * @return åˆ†è¯é€Ÿç‡
+     * @param input     ÊäÈëÎÄ¼ş
+     * @param output    Êä³öÎÄ¼ş
+     * @param segmenter ¶ÔÎÄ±¾½øĞĞ·Ö´ÊµÄÂß¼­
+     * @return ·Ö´ÊËÙÂÊ
      * @throws Exception
      */
     protected float segFile(final String input, final String output, final Segmenter segmenter) throws Exception {
-        //å¦‚æœåˆ†è¯ç»“æœæ–‡ä»¶å­˜æ”¾ç›®å½•ä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»º
+        //Èç¹û·Ö´Ê½á¹ûÎÄ¼ş´æ·ÅÄ¿Â¼²»´æÔÚ£¬Ôò´´½¨
         if (!Files.exists(Paths.get(output).getParent())) {
             Files.createDirectory(Paths.get(output).getParent());
         }
@@ -177,7 +177,7 @@ public abstract class Evaluation {
                      new FileOutputStream(output), "utf-8"))) {
             long size = Files.size(Paths.get(input));
             System.out.println("size:" + size);
-            System.out.println("æ–‡ä»¶å¤§å°ï¼š" + (float) size / 1024 / 1024 + " MB");
+            System.out.println("ÎÄ¼ş´óĞ¡£º" + (float) size / 1024 / 1024 + " MB");
             int textLength = 0;
             int progress = 0;
             long start = System.currentTimeMillis();
@@ -194,24 +194,27 @@ public abstract class Evaluation {
                     progress += line.length();
                     if (progress > 500000) {
                         progress = 0;
-                        System.out.println("åˆ†è¯è¿›åº¦ï¼š" + (int) (textLength * 2.99 / size * 100) + "%");
+                        System.out.println("·Ö´Ê½ø¶È£º" + (int) (textLength * 2.99 / size * 100) + "%");
+                        if((int) (textLength * 2.99 / size * 100) > 48){
+                            break;
+                        }
                     }
                 } catch (Exception e) {
-                    System.out.println("åˆ†è¯å¤±è´¥ï¼š" + line);
+                    System.out.println("·Ö´ÊÊ§°Ü£º" + line);
                     e.printStackTrace();
                 }
             }
             long cost = System.currentTimeMillis() - start;
             rate = textLength / (float) cost;
-            System.out.println("å­—ç¬¦æ•°ç›®ï¼š" + textLength);
-            System.out.println("åˆ†è¯è€—æ—¶ï¼š" + cost + " æ¯«ç§’");
-            System.out.println("åˆ†è¯é€Ÿåº¦ï¼š" + rate + " å­—ç¬¦/æ¯«ç§’");
+            System.out.println("×Ö·ûÊıÄ¿£º" + textLength);
+            System.out.println("·Ö´ÊºÄÊ±£º" + cost + " ºÁÃë");
+            System.out.println("·Ö´ÊËÙ¶È£º" + rate + " ×Ö·û/ºÁÃë");
         }
         return rate;
     }
 
     public static String getTimeDes(Long ms) {
-        //å¤„ç†å‚æ•°ä¸ºNULLçš„æƒ…å†µ
+        //´¦Àí²ÎÊıÎªNULLµÄÇé¿ö
         if (ms == null) {
             return "";
         }
@@ -228,19 +231,19 @@ public abstract class Evaluation {
 
         StringBuilder str = new StringBuilder();
         if (day > 0) {
-            str.append(day).append("å¤©,");
+            str.append(day).append("Ìì,");
         }
         if (hour > 0) {
-            str.append(hour).append("å°æ—¶,");
+            str.append(hour).append("Ğ¡Ê±,");
         }
         if (minute > 0) {
-            str.append(minute).append("åˆ†é’Ÿ,");
+            str.append(minute).append("·ÖÖÓ,");
         }
         if (second > 0) {
-            str.append(second).append("ç§’,");
+            str.append(second).append("Ãë,");
         }
         if (milliSecond > 0) {
-            str.append(milliSecond).append("æ¯«ç§’,");
+            str.append(milliSecond).append("ºÁÃë,");
         }
         if (str.length() > 0) {
             str = str.deleteCharAt(str.length() - 1);

@@ -1,7 +1,7 @@
 /**
  * 
  * APDPlat - Application Product Development Platform
- * Copyright (c) 2013, æ¨å°šå·, yang-shangchuan@qq.com
+ * Copyright (c) 2013, ÑîÉĞ´¨, yang-shangchuan@qq.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,33 +30,33 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 /**
- * ä¸­æ–‡åˆ†è¯å™¨åˆ†è¯æ•ˆæœè¯„ä¼°ç¨‹åº
- * @author æ¨å°šå·
+ * ÖĞÎÄ·Ö´ÊÆ÷·Ö´ÊĞ§¹ûÆÀ¹À³ÌĞò
+ * @author ÑîÉĞ´¨
  */
 public class Evaluator {
     public static void main(String[] args) throws Exception{
         long start = System.currentTimeMillis();
         String testText = null;
         String standardText = null;
-        //å¯é€šè¿‡å‘½ä»¤è¡Œå‚æ•°æŒ‡å®šä¸è¯„ä¼°çš„åˆ†è¯å™¨
+        //¿ÉÍ¨¹ıÃüÁîĞĞ²ÎÊıÖ¸¶¨²»ÆÀ¹ÀµÄ·Ö´ÊÆ÷
         Set<String> excludes = new HashSet<>();
         for(String arg : args){
-            System.out.println("å‘½ä»¤è¡Œå‚æ•°ï¼š"+arg);
+            System.out.println("ÃüÁîĞĞ²ÎÊı£º"+arg);
             if(arg.endsWith(".jar")){
                 continue;
             }
             if(arg.startsWith("-testText=")){
                 testText=arg.replace("-testText=", "").trim();
-                System.out.println("testTextï¼š"+testText);
+                System.out.println("testText£º"+testText);
                 continue;
             }
             if(arg.startsWith("-standardText=")){
                 standardText=arg.replace("-standardText=", "").trim();
-                System.out.println("standardTextï¼š"+standardText);
+                System.out.println("standardText£º"+standardText);
                 continue;
             }
             excludes.add(arg);
-            System.out.println("ä¸è¯„ä¼°ï¼š" + arg);
+            System.out.println("²»ÆÀ¹À£º" + arg);
         }
         List<Class> classes = new ArrayList<>();
         if(args.length>0 && new File(args[0]).exists()){
@@ -65,10 +65,10 @@ public class Evaluator {
             classes.addAll(processDir(excludes));
         }
         Collections.reverse(classes);
-        System.out.println("éœ€è¦è¯„ä¼°çš„åˆ†è¯å™¨ï¼š");
+        System.out.println("ĞèÒªÆÀ¹ÀµÄ·Ö´ÊÆ÷£º");
         int i=1;
         for(Class clazz : classes){
-            System.out.println((i++)+"ï¼š"+clazz.getSimpleName());
+            System.out.println((i++)+"£º"+clazz.getSimpleName());
         }
         List<EvaluationResult> list = new ArrayList<>();
         for(Class clazz : classes){
@@ -77,15 +77,15 @@ public class Evaluator {
                 eval.setTestText(testText);
                 eval.setStandardText(standardText);
             }
-            System.out.println("å…ˆé¢„çƒ­ï¼Œå†è¯„ä¼°ï¼š"+((WordSegmenter)eval).seg("ä»Šå¤©ä¸‹é›¨ï¼Œä¸­åäººæ°‘å…±å’Œå›½ï¼Œç»“åˆæˆåˆ†å­"));
+            System.out.println("ÏÈÔ¤ÈÈ£¬ÔÙÆÀ¹À£º"+((WordSegmenter)eval).seg("½ñÌìÏÂÓê£¬ÖĞ»ªÈËÃñ¹²ºÍ¹ú£¬½áºÏ³É·Ö×Ó"));
             list.addAll(eval.run());
         }
         Evaluation.generateReport(list);
         long cost = System.currentTimeMillis() - start;
-        System.out.println("è¯„ä¼°è€—æ—¶ï¼š"+Evaluation.getTimeDes(cost));
+        System.out.println("ÆÀ¹ÀºÄÊ±£º"+Evaluation.getTimeDes(cost));
     }
     /**
-     * è·å–jarä¸­æ‰€æœ‰Evaluationæ¥å£çš„å®ç°ç±»
+     * »ñÈ¡jarÖĞËùÓĞEvaluation½Ó¿ÚµÄÊµÏÖÀà
      * @param jarFile
      * @return
      * @throws IOException
@@ -115,7 +115,7 @@ public class Evaluator {
         return list;
     }
     /**
-     * è·å–æ–‡ä»¶å¤¹ä¸­æ‰€æœ‰Evaluationæ¥å£çš„å®ç°ç±»
+     * »ñÈ¡ÎÄ¼ş¼ĞÖĞËùÓĞEvaluation½Ó¿ÚµÄÊµÏÖÀà
      * @return
      * @throws ClassNotFoundException 
      */
