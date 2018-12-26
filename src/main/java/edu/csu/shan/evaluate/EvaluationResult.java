@@ -130,17 +130,17 @@ public class EvaluationResult implements Comparable{
                 +"\n"
                 +"    分词速度："+segSpeed+" 字符/毫秒"
                 +"\n"
-                +"    行数完美率："+getLinePerfectRate()+"%"
-                +"  行数错误率："+getLineWrongRate()+"%"
-                +"  总的行数："+totalLineCount
-                +"  完美行数："+perfectLineCount
-                +"  错误行数："+wrongLineCount
+             //   +"    行数完美率："+getLinePerfectRate()+"%"
+             //   +"  行数错误率："+getLineWrongRate()+"%"
+            //    +"  总的行数："+totalLineCount
+            //    +"  完美行数："+perfectLineCount
+            //    +"  错误行数："+wrongLineCount
                 +"\n"
-                +"    分词完美率："+getCharPerfectRate()+"%"
-                +" 分词错误率："+getCharWrongRate()+"%"
-                +" 总的字数："+totalCharCount
-                +" 完美字数："+perfectCharCount
-                +" 错误字数："+wrongCharCount;
+                +"    抽词完美率："+getCharPerfectRate()+"%"
+                +" 抽词错误率："+getCharWrongRate()+"%"
+                +" 总的词数："+totalCharCount
+                +" 完美词数："+perfectCharCount
+                +" 错误词数："+wrongCharCount;
     }
     @Override
     public int compareTo(Object o) {

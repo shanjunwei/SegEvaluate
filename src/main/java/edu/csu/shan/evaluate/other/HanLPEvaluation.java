@@ -120,7 +120,7 @@ public class HanLPEvaluation extends Evaluation implements WordSegmenter {
         return result.toString();
     }
 
-    public static void main(String[] args) throws Exception{
-        new HanLPEvaluation().run();
-    }
+//    public static void main(String[] args) throws Exception{
+//        new HanLPEvaluation().run();
+//    }
 }

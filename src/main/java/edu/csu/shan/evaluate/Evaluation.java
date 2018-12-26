@@ -28,10 +28,9 @@ import java.util.*;
 
 /**
  * 通用评估逻辑
- *
- * @author 杨尚川
  */
 public abstract class Evaluation {
+    protected String output = "data/seg_result_new.txt";
     protected String testText = "data/test-text.txt";
     protected String standardText = "data/standard-text.txt";
 
@@ -115,7 +114,9 @@ public abstract class Evaluation {
         // int wrongCharCount=0;
         //      int perfectCharCount=0;
         try (BufferedReader resultReader = new BufferedReader(new InputStreamReader(new FileInputStream(resultText), "utf-8"));
-             BufferedReader standardReader = new BufferedReader(new InputStreamReader(new FileInputStream(standardText), "utf-8"))) {
+             BufferedReader standardReader = new BufferedReader(new InputStreamReader(new FileInputStream(standardText), "utf-8"));
+             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+                     new FileOutputStream(output), "utf-8"))) {
             String result;
             while ((result = resultReader.readLine()) != null) {
                 result = result.trim();
@@ -123,6 +124,7 @@ public abstract class Evaluation {
                 if (result.equals("")) {
                     continue;
                 }
+                writer.write(result +"    XX———>");
                 if (result.equals(standard)) {
                     //分词结果和标准一模一样
                     perfectLineCount++;
@@ -130,18 +132,26 @@ public abstract class Evaluation {
                     // perfectCharCount+=standard.replaceAll("\\s+", "").length();
                 } else {
                     //分词结果和标准不一样
-                    Set<String> resultSet = new HashSet<>(Arrays.asList(result.split(" ")));
+                    Set<String> resultSet = new LinkedHashSet<>(Arrays.asList(result.split(" ")));
                     Set<String> standardSet = new HashSet<>(Arrays.asList(standard.split(" ")));
-
+                    int wrongCount = 0;
                     for (String seg : resultSet) {
                         if (!standardSet.contains(seg)) {
+                            wrongCount++;
                             wrongSegCount++;   // 错分个数加一
+                            writer.write(""+seg+" ");
+                            //writer.write(result.replaceAll("\\s+",""));   // 分词分错的行数
                         } else {
                             perfectSegCount++;
                         }
                     }
-                    wrongLineCount++;    //wrongCharCount+=standard.replaceAll("\\s+", "").length();
+                    if (wrongCount == 1) {
+                        perfectLineCount++;  // 错一个也认为是完美
+                    } else {
+                        wrongLineCount++;    //wrongCharCount+=standard.replaceAll("\\s+", "").length();
+                    }
                 }
+                writer.write("\n");
             }
         }
         int totalLineCount = perfectLineCount + wrongLineCount;
@@ -156,7 +166,6 @@ public abstract class Evaluation {
         er.setWrongLineCount(wrongLineCount);
         return er;
     }
-
     /**
      * 对文件进行分词
      *
@@ -195,7 +204,7 @@ public abstract class Evaluation {
                     if (progress > 500000) {
                         progress = 0;
                         System.out.println("分词进度：" + (int) (textLength * 2.99 / size * 100) + "%");
-                        if((int) (textLength * 2.99 / size * 100) > 48){
+                        if ((int) (textLength * 2.99 / size * 100) > 48) {
                             break;
                         }
                     }
