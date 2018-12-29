@@ -1,13 +1,9 @@
 package edu.csu.shan.queue;
 
-import config.Config;
 import edu.csu.shan.pojo.LineMsg;
-import org.apache.commons.lang.StringUtils;
 import util.FileUtils;
 import util.HanUtils;
-
 import java.io.*;
-
 import static edu.csu.shan.queue.Constans.CORPUS_INPUT_PATH;
 
 /**
@@ -38,10 +34,10 @@ public class Producer {
         // 再拆分停用词
         for (int i = 0; i < replaceNonChinese.length; i++) {
             String textDS = replaceNonChinese[i];   // 这里没有逗号
-            if (StringUtils.isNotBlank(textDS) && textDS.length() != 1) {
+           // if (StringUtils.isNotBlank(textDS) && textDS.length() != 1) {
                 LineMsg lineMsg = new LineMsg(i+1, textDS);
                 myBlockingQueue.produce(lineMsg);
-            }
+           // }
         }
 
         System.out.println(myBlockingQueue.fairQueue.size()  +"==="+replaceNonChinese.length);

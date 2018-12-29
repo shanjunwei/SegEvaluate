@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
  * 全局变量
  */
 public class Constans {
-    public static final int THREAD_NUM = 20;  // 线程数
+    public static final int THREAD_NUM = 25;  // 线程数
     //连接本地的 Redis 服务
     public static final Jedis redis = new Jedis("localhost");   // redis client
     //  分词后存这里
